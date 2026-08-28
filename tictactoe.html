@@ -3,28 +3,109 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TICTACTOE</title>
+    <title>Tic-Tac-Toe Pro</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-     <div class="winner">Winner</div>
-      <h1>TIC-TAC-TOE GAME</h1>
-      <div class="container">
-        <div class="game">
-            <button class="box"></button>
-             <button class="box"></button>
-              <button class="box"></button>
-               <button class="box"></button>
-                <button class="box"></button>
-                 <button class="box"></button>
-                  <button class="box"></button>
-                   <button class="box"></button>
-                    <button class="box"></button>
-                  
+    <!-- Confetti Canvas Overlay -->
+    <canvas id="confetti-canvas"></canvas>
+
+    <div class="app-container">
+        <!-- Header -->
+        <header class="app-header">
+            <h1 class="game-title">TIC-TAC-TOE</h1>
+            <div class="header-actions">
+                <button id="sound-toggle-btn" class="icon-btn" title="Toggle Sound" aria-label="Toggle Sound">
+                    <span id="sound-icon">🔊</span>
+                </button>
+                <button id="reset-scores-btn" class="secondary-btn" title="Reset all scores">
+                    Reset Scores
+                </button>
+            </div>
+        </header>
+
+        <!-- Mode & Difficulty Selectors -->
+        <section class="controls-panel">
+            <div class="mode-selector">
+                <button class="mode-btn active" data-mode="pvp">
+                    <span class="btn-icon">👥</span> 2 Players
+                </button>
+                <button class="mode-btn" data-mode="ai">
+                    <span class="btn-icon">🤖</span> vs AI
+                </button>
+            </div>
+
+            <div id="difficulty-selector" class="difficulty-selector hidden">
+                <span class="selector-label">AI Level:</span>
+                <div class="diff-btn-group">
+                    <button class="diff-btn" data-diff="easy">Easy</button>
+                    <button class="diff-btn" data-diff="medium">Medium</button>
+                    <button class="diff-btn active" data-diff="impossible">Impossible</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Scoreboard -->
+        <section class="scoreboard">
+            <div class="score-card player-x">
+                <span class="player-label" id="label-x">PLAYER (X)</span>
+                <span class="score-value" id="score-x">0</span>
+            </div>
+            <div class="score-card ties">
+                <span class="player-label">TIES</span>
+                <span class="score-value" id="score-ties">0</span>
+            </div>
+            <div class="score-card player-o">
+                <span class="player-label" id="label-o">PLAYER (O)</span>
+                <span class="score-value" id="score-o">0</span>
+            </div>
+        </section>
+
+        <!-- Turn Indicator -->
+        <div class="turn-indicator" id="turn-indicator">
+            <span class="turn-badge" id="turn-badge">X</span>
+            <span class="turn-text" id="turn-text">TURN</span>
         </div>
-          <button id="reset">Reset<button/>
-      </div>
-      
-      <script src="tictactoe.js"></script>
+
+        <!-- 3x3 Game Board -->
+        <main class="board-wrapper">
+            <div class="game-board" id="game-board" role="grid" aria-label="Tic Tac Toe Board">
+                <button class="box" data-index="0" aria-label="Cell 1"></button>
+                <button class="box" data-index="1" aria-label="Cell 2"></button>
+                <button class="box" data-index="2" aria-label="Cell 3"></button>
+                <button class="box" data-index="3" aria-label="Cell 4"></button>
+                <button class="box" data-index="4" aria-label="Cell 5"></button>
+                <button class="box" data-index="5" aria-label="Cell 6"></button>
+                <button class="box" data-index="6" aria-label="Cell 7"></button>
+                <button class="box" data-index="7" aria-label="Cell 8"></button>
+                <button class="box" data-index="8" aria-label="Cell 9"></button>
+            </div>
+        </main>
+
+        <!-- Bottom Game Actions -->
+        <footer class="game-footer">
+            <button id="restart-round-btn" class="primary-btn">
+                <span class="btn-icon">🔄</span> New Round
+            </button>
+        </footer>
+    </div>
+
+    <!-- Result Modal Overlay -->
+    <div id="result-modal" class="modal-overlay hidden">
+        <div class="modal-card">
+            <div class="modal-icon" id="modal-icon">🏆</div>
+            <h2 class="modal-title" id="modal-title">PLAYER X WON!</h2>
+            <p class="modal-subtitle" id="modal-subtitle">Brilliant victory this round!</p>
+            <div class="modal-actions">
+                <button id="modal-next-btn" class="primary-btn modal-btn">Next Round</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="tictactoe.js"></script>
 </body>
 </html>
